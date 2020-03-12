@@ -13,5 +13,20 @@ object JokeList {
     )
 
 }
+//convertir liste de strings en liste de jokes......extensions
+//fun List<String>.toJokes():List<Joke>{
+//    return this.map{it:String
+//        Joke{
+//            categories = emptyList(),
+//            createAt="",
+//            isFavorite = false,
+//            updateAt = "",
+//            url ="",
+//            id="fakeid",
+//            value = jokeString
+//
+//        }}
+
+//}
 
 

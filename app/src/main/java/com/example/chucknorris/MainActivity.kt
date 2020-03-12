@@ -3,6 +3,10 @@ package com.example.chucknorris
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
+
+//import androidx.recyclerView.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,8 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         val jokes = JokeList.jokes;
         for(i in jokes) {
-            Log.d("blague",i);
+            Log.d("blague", i);
         }
+
+        my_recycler_view.layoutManager = LinearLayoutManager(this)
+
+
     }
 
 

@@ -1,6 +1,6 @@
 # ChuckNorris
 
-3e commit : Adapter
+4e commit (End_Part.1) : Adapter
 
 Pour cette partie, je transforme le fichier Kotlin "Joke.kt" de l'ancien commit en classe DataSource, qui va contenir un objet,
 qui lui contient la fonction createDataSet() contenant la liste de "Joke".

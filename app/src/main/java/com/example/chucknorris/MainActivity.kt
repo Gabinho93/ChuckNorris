@@ -10,19 +10,33 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var jokeAdapter: JokeAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val jokes = JokeList.jokes;
+/*        val jokes = JokeList.jokes;
         for(i in jokes) {
             Log.d("blague", i);
-        }
+        }*/
 
-        my_recycler_view.layoutManager = LinearLayoutManager(this)
-
-
+        initRecyclerView()
+        addDataSet()
     }
+
+    private fun addDataSet(){
+        val data = DataSource.createDataSet()
+        jokeAdapter.submitList(data)
+    }
+
+    private fun initRecyclerView() {
+        my_recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
+        jokeAdapter = JokeAdapter()
+        my_recycler_view.adapter = jokeAdapter
+    }
+
+
 
 
 

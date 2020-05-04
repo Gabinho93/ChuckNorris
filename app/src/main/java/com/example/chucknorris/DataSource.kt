@@ -7,30 +7,31 @@ class DataSource {
 
         fun createDataSet(): ArrayList<Joke>{
             val list = ArrayList<Joke>()
+            val list2 = ArrayList<String>()
             list.add(
-                Joke("The end of the world is scared to come because Chuck Norris will round house kick is ass.")
+                Joke(list2,"Kick","","1","","" ,"The end of the world is scared to come because Chuck Norris will round house kick is ass.")
             )
-            list.add(
-                Joke("All e-mail from Chuck Norris is preceded by this warning: Open at your own risk. Enough said.")
-            )
-            list.add(
-                Joke("Chuck Norris can kill you just by hitting.......... at GTA 2")
-            )
-            list.add(
-                Joke("Chuck norris can kick u with his hands, and punch u with his feet.")
-            )
-            list.add(
-                Joke("Chuck Norris won the National Pie Eating Contest by devoring 168 hotdogs in less than 10 minutes.")
-            )
-            list.add(
-                Joke("If you are female, and you are reading this, Chuck Norris just fucked you and erased your memory when you read the word 'fucked'. And again, just then. Fuck, sorry.")
-            )
-            list.add(
-                Joke("Chuck Norris predicted the Mayan Calendar.")
-            )
-            list.add(
-                Joke("Chuck Norris is a bulldozer with a beard.")
-            )
+//            list.add(
+//                Joke("All e-mail from Chuck Norris is preceded by this warning: Open at your own risk. Enough said.")
+//            )
+//            list.add(
+//                Joke("Chuck Norris can kill you just by hitting.......... at GTA 2")
+//            )
+//            list.add(
+//                Joke("Chuck norris can kick u with his hands, and punch u with his feet.")
+//            )
+//            list.add(
+//                  Joke("Chuck Norris won the National Pie Eating Contest by devoring 168 hotdogs in less than 10 minutes.")
+//            )
+//            list.add(
+//                  Joke("If you are female, and you are reading this, Chuck Norris just fucked you and erased your memory when you read the word 'fucked'. And again, just then. Fuck, sorry.")
+//            )
+//              list.add(
+//                Joke("Chuck Norris predicted the Mayan Calendar.")
+//            )
+//            //list.add(
+//                Joke("Chuck Norris is a bulldozer with a beard.")
+//            )
 
             return list
         }

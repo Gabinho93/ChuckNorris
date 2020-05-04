@@ -37,7 +37,7 @@ class JokeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val blague = TextView.my_joke
 
         fun bind(joke: Joke){
-            blague.setText(joke.the_joke)
+            blague.setText(joke.value)
         }
     }
 

@@ -5,15 +5,12 @@ package com.example.chucknorris
 class DataSource {
     companion object{
 
-        fun createDataSet(): ArrayList<Joke>{
-            val list = ArrayList<Joke>()
-            val list2 = ArrayList<String>()
-            list.add(
-                Joke(list2,"Kick","","1","","" ,"The end of the world is scared to come because Chuck Norris will round house kick is ass.")
-            )
-//            list.add(
-//                Joke("All e-mail from Chuck Norris is preceded by this warning: Open at your own risk. Enough said.")
+        fun createDataSet(): List<Joke>{
+            val list = listOf(
+                Joke(emptyList(),"09/02","aaaaa","1","10/02","jiung" ,"The end of the world is scared to come because Chuck Norris will round house kick is ass."),
+                Joke(emptyList(),"09/03","bbbbb","2","10/03","hglklk","All e-mail from Chuck Norris is preceded by this warning: Open at your own risk. Enough said.")
 //            )
+            )
 //            list.add(
 //                Joke("Chuck Norris can kill you just by hitting.......... at GTA 2")
 //            )
@@ -33,7 +30,7 @@ class DataSource {
 //                Joke("Chuck Norris is a bulldozer with a beard.")
 //            )
 
-            return list
+                return list
         }
     }
 }

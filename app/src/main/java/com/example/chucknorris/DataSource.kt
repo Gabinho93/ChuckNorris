@@ -5,7 +5,7 @@ package com.example.chucknorris
 class DataSource {
     companion object{
 
-        fun createDataSet(): List<Joke>{
+        fun createDataSet(): List<Joke> {
             val list = listOf(
                 Joke(emptyList(),"09/02","aaaaa","1","10/02","jiung" ,"The end of the world is scared to come because Chuck Norris will round house kick is ass."),
                 Joke(emptyList(),"09/03","bbbbb","2","10/03","hglklk","All e-mail from Chuck Norris is preceded by this warning: Open at your own risk. Enough said.")

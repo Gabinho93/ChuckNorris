@@ -14,6 +14,13 @@
         android:layout_height="match_parent"
         />
 
+    <Button
+        android:id="@+id/my_button"
+        android:text="Click me to get a Joke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

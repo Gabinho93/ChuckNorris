@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -15,6 +16,7 @@ import kotlinx.serialization.UnstableDefault
 class MainActivity : AppCompatActivity() {
 
     private lateinit var jokeAdapter: JokeAdapter
+    private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     @UnstableDefault
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
         addDataSet()
         jokesService()
+        onDestroy()
+
     }
 
     private fun addDataSet(){
@@ -48,9 +52,16 @@ class MainActivity : AppCompatActivity() {
         val singlejoke = jokeService.giveMeAJoke()
             .subscribeOn(Schedulers.io())
             .subscribeBy(
-                onError = { error -> Log.e("Error Joke","$error")  },
-                onSuccess = { it.toString() }
+                onError = { error -> Log.e("Error Joke","$error")  }, //affiche msg d'erreur dans Logcat
+                onSuccess = { it -> Log.i("Joke :","$it") } //affiche une info dans Logcat
+
             )
+        compositeDisposable.add(singlejoke)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
     }
 
 

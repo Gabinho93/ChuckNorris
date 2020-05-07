@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
         addDataSet()
         jokesService()
-        onDestroy()
+
 
     }
 

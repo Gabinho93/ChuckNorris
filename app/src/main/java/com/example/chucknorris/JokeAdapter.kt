@@ -30,8 +30,9 @@ class JokeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return items.size
     }
     //fun submitList(jokeList: List<Joke>)
-     fun submitList(jokeList: List<Joke>){
-        items = jokeList
+
+     fun submitList(joke: Joke){
+        items = items.plus(joke)
      }
 
     class JokeViewHolder constructor(TextView: View): RecyclerView.ViewHolder(TextView){

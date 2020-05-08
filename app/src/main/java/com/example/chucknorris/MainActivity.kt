@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var jokeAdapter: JokeAdapter
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private var listJokes = ArrayList<Joke>()
+    //private var listJokes = ArrayList<Joke>()
+    //private var listJokes = Joke(emptyList(),"","","","","","")
+    private val n:Long = 10
 
     @UnstableDefault
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,31 +34,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initRecyclerView()
-        addDataSet()
+        //addDataSet()
 
         my_button.setOnClickListener {
-            progress_bar.max = 100
-            val currentProgress = 60
-            ObjectAnimator.ofInt(progress_bar, "progress", currentProgress)
-                .setDuration(1000)
-                .start()
             //val loadingImage = (ProgressBar) root.findViewById(R.id.progress_bar)
             //loadingImage.setVisibility(View.VISIBLE)
-            findViewById<ProgressBar>(R.id.progress_bar).visibility = VISIBLE
-            jokesService()
+            //findViewById<ProgressBar>(R.id.progress_bar).visibility = VISIBLE
+            jokesService() //10
             //progress_bar.visibility = View.VISIBLE
-            findViewById<ProgressBar>(R.id.progress_bar).visibility = INVISIBLE
-            jokeAdapter.notifyDataSetChanged()
+            //findViewById<ProgressBar>(R.id.progress_bar).visibility = INVISIBLE
+
             //progress_bar.visibility = View.INVISIBLE
             //loadingImage.setVisibility(View.INVISIBLE)
         }
 
+
+
     }
 
-    private fun addDataSet(){
+    //private fun addDataSet(){
         //val data = DataSource.createDataSet()
-        jokeAdapter.submitList(listJokes)
-    }
+        //jokeAdapter.submitList(listJokes)
+    //}
 
     private fun initRecyclerView() {
         my_recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
@@ -70,11 +69,27 @@ class MainActivity : AppCompatActivity() {
         val singlejoke = jokeService.giveMeAJoke()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .delay(3000, TimeUnit.MILLISECONDS)
+            .repeat(n)
+            .doOnSubscribe{
+                progress_bar.max = 100
+                val currentProgress = 100
+                ObjectAnimator.ofInt(progress_bar, "progress", currentProgress)
+                    .setDuration(2000)
+                    .start()
+                progress_bar.visibility = View.VISIBLE
+            }
+            .doAfterTerminate {
+                progress_bar.visibility = View.INVISIBLE
+            }
+            //.delay(3000, TimeUnit.MILLISECONDS)
             .subscribeBy(
                 onError = { error -> Log.e("Error Joke","$error")  }, //affiche msg d'erreur dans Logcat
-                onSuccess = { it -> Log.i("Joke :","$it") //affiche une info dans Logcat listJokes.add(it)
-                                listJokes.add(it)}
+                onNext = { it -> Log.i("Joke :","$it") //affiche une info dans Logcat listJokes.add(it)
+                        //jokeAdapter.add(it)
+                        jokeAdapter.submitList(it) },
+                onComplete = {
+                    jokeAdapter.notifyDataSetChanged()
+                }
 
             )
         compositeDisposable.add(singlejoke)
@@ -91,5 +106,6 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
 
 

@@ -35,6 +35,7 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
 
      fun submitList(joke: Joke){
         items = items.plus(joke)
+        notifyDataSetChanged()
      }
 
     class JokeViewHolder constructor(TextView: View): RecyclerView.ViewHolder(TextView){

@@ -3,6 +3,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatDrawableManager.get
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.joke_layout.view.*
 import kotlin.collections.ArrayList
@@ -37,6 +38,10 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
         items = items.plus(joke)
         notifyDataSetChanged()
      }
+
+    fun getList(): List<Joke> {
+        return items
+    }
 
     class JokeViewHolder constructor(TextView: View): RecyclerView.ViewHolder(TextView){
         private val blague: TextView = TextView.my_joke

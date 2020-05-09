@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var jokeAdapter: JokeAdapter
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
     //private var listJokes = ArrayList<Joke>()
-    private var listJokes = mutableListOf<Joke>()
     //private var listJokes = Joke(emptyList(),"","","","","","")
     //ViewModelProviders.of(this)
     private val n:Long = 10
@@ -112,8 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        //val jokeSubmit = outState.putString(JOKES_KEY,Json(JsonConfiguration.Stable).stringify(Joke.serializer().list,))
-        val json = Json(JsonConfiguration.Stable).stringify(Joke.serializer().list,listJokes)
+        val json = Json(JsonConfiguration.Stable).stringify(Joke.serializer().list,jokeAdapter.getList())
         outState.putString(JOKES_KEY, json)
         super.onSaveInstanceState(outState)
     }

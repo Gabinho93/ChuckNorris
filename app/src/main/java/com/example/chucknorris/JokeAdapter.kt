@@ -4,12 +4,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.joke_layout.view.*
 import kotlin.collections.ArrayList
 
 
-class JokeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items : List<Joke> = ArrayList()
     //ArrayList()
@@ -20,9 +19,12 @@ class JokeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is JokeViewHolder -> {
-                holder.bind(items.get(position))
+                holder.bind(items[position])
             }
+
         }
+        if(position==items.size-1)
+            onBottomReached()
     }
 
 

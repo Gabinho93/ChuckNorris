@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
-import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.serialization.UnstableDefault
-import java.util.concurrent.TimeUnit
 
 
 //import androidx.recyclerView.widget.RecyclerView
@@ -59,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         my_recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
-        jokeAdapter = JokeAdapter()
+        jokeAdapter = JokeAdapter{jokesService()}
         my_recycler_view.adapter = jokeAdapter
     }
 

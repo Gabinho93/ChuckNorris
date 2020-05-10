@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.joke_layout.*
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.Json
@@ -40,9 +43,6 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
         //addDataSet()
 
-        //my_button.setOnClickListener {
-            //jokesService() //10
-        //}
 
         if (savedInstanceState != null){
             //savedInstanceState.getString(JOKES_KEY)?.let {
@@ -56,8 +56,6 @@ class MainActivity : AppCompatActivity() {
             jokesService()
         }
 
-        //savedInstanceState?.let { onSaveInstanceState(it) }
-
     }
 
     //private fun addDataSet(){
@@ -70,6 +68,13 @@ class MainActivity : AppCompatActivity() {
         my_recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
         jokeAdapter = JokeAdapter{jokesService()}
         my_recycler_view.adapter = jokeAdapter
+
+        val itemTouch = JokeTouchHelper(
+            { src -> jokeAdapter.onJokeRemoved(src) },
+            { src, dest -> jokeAdapter.onItemMoved(src, dest)}
+        )
+
+        itemTouch.attachToRecyclerView(my_recycler_view)
     }
 
     @UnstableDefault

@@ -14,15 +14,6 @@
         android:layout_height="match_parent"
         />
 
-    <Button
-        android:id="@+id/my_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Click me to get a Joke"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="30dp" />
-
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleHorizontal"

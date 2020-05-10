@@ -14,13 +14,19 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
     private var items : List<Joke> = ArrayList()
     //ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return JokeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.joke_layout, parent,false))
+        val jokeViewCreate = JokeView(parent.context)
+        return JokeViewHolder(jokeViewCreate)
+        //return JokeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.joke_layout, parent,false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is JokeViewHolder -> {
                 holder.bind(items[position])
+                val theView: TextView = holder.jokeView.findViewById(R.id.my_joke)
+                val theModel = JokeView.Model(theView)
+
+                holder.jokeView.setupView(theModel)
             }
 
         }
@@ -43,8 +49,8 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
         return items
     }
 
-    class JokeViewHolder constructor(TextView: View): RecyclerView.ViewHolder(TextView){
-        private val blague: TextView = TextView.my_joke
+    class JokeViewHolder constructor(var jokeView: JokeView): RecyclerView.ViewHolder(jokeView){
+        private val blague: TextView = jokeView.my_joke
 
         fun bind(joke: Joke){
             //blague.setText(joke.value)

@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             .subscribeBy(
                 onError = { error -> Log.e("Error Joke","$error")  }, //affiche msg d'erreur dans Logcat
                 onNext = { it -> Log.i("Joke :","$it") //affiche une info dans Logcat listJokes.add(it)
-                        listJokes.add(it)
+                        //
                         jokeAdapter.submitList(it) },
                 onComplete = {
                     //jokeAdapter.notifyDataSetChanged()

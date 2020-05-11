@@ -13,7 +13,8 @@ import kotlin.collections.ArrayList
 class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items : MutableList<Joke> = mutableListOf()
-    //ArrayList()
+    //private var itemsFav : MutableList<Joke> = mutableListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val jokeViewCreate = JokeView(parent.context)
 
@@ -26,18 +27,20 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
         when (holder) {
             is JokeViewHolder -> {
                 //val theJoke = holder.bind(items[position])
-                //val theJoke = items[position]
+                val theJoke = items[position].value
                 //val theShareButton: ImageButton
                 //val theShareButton: ImageButton = holder.jokeView.findViewById(R.id.share_button)
-                //val theFavButton: ImageButton = holder.jokeView.findViewById(R.id.fav_button)
-                holder.jokeView.setupView(JokeView.Model(items[position].value))
+                val theFavButton: ImageButton = holder.jokeView.findViewById(R.id.fav_button)
+                val theIsFav: Boolean = true
+                //holder.jokeView.setupView(JokeView.Model(items[position].value,true))
+
                 //val theView: TextView = holder.jokeView.findViewById(R.id.my_joke)
 
 
-                //val theModel = JokeView.Model(theJoke)
+                val theModel = JokeView.Model(theJoke,theFavButton,theIsFav)
                 //val theModel = JokeView.Model(theView)
 
-                //holder.jokeView.setupView(theModel)
+                holder.jokeView.setupView(theModel)
             }
 
         }

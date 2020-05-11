@@ -1,6 +1,8 @@
 package com.example.chucknorris
 
 import android.animation.ObjectAnimator
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -56,7 +58,29 @@ class MainActivity : AppCompatActivity() {
             jokesService()
         }
 
+        /*share_button.setOnClickListener {
+            val myIntent:Intent= Intent(Intent.ACTION_SENDTO)
+            //myIntent.putExtra
+            Intent.createChooser(myIntent,"Share to :")
+
+                startActivity(myIntent)
+
+        } */
+
+        /*fav_button.setOnClickListener {
+                saveData()
+        } */
+
+
     }
+
+    /*private fun saveData(){
+        val sharedPreferences: SharedPreferences = getSharedPreferences("Favorites jokes",MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        val json = Json(JsonConfiguration.Stable).stringify(Joke.serializer().list,jokeAdapter.getList())
+        editor.putString(JOKES_KEY,json)
+        editor.apply()
+    } */
 
     //private fun addDataSet(){
         //val data = DataSource.createDataSet()

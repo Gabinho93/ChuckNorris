@@ -12,33 +12,42 @@ import kotlin.collections.ArrayList
 
 class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items : MutableList<Joke> = mutableListOf()
-    //private var itemsFav : MutableList<Joke> = mutableListOf()
+    var items : MutableList<Joke> = mutableListOf()
+    var itemsFav : MutableList<String> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val jokeViewCreate = JokeView(parent.context)
 
         return JokeViewHolder(jokeViewCreate)
-        //return JokeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.joke_layout, parent,false))
-        //return JokeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.joke_layout, this, true))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is JokeViewHolder -> {
-                //val theJoke = holder.bind(items[position])
                 val theJoke = items[position].value
-                //val theShareButton: ImageButton
-                //val theShareButton: ImageButton = holder.jokeView.findViewById(R.id.share_button)
+                //val theJoke = holder.jokeView.my_joke
+                val theShareButton: ImageButton = holder.jokeView.findViewById(R.id.share_button)
                 val theFavButton: ImageButton = holder.jokeView.findViewById(R.id.fav_button)
-                val theIsFav: Boolean = true
-                //holder.jokeView.setupView(JokeView.Model(items[position].value,true))
+                val theIsFav: Boolean = false
 
-                //val theView: TextView = holder.jokeView.findViewById(R.id.my_joke)
+                if(theIsFav){ //La boucle qui va déterminer si l'items est déjà "fav" ou non puis attribuer l'icône étoile pleine ou non
+                    theFavButton.setImageResource(R.drawable.ic_star_black_24dp)
+                }
 
+                theFavButton.setOnClickListener {
 
-                val theModel = JokeView.Model(theJoke,theFavButton,theIsFav)
-                //val theModel = JokeView.Model(theView)
+                    if(itemsFav.contains(items[position].id)){
+                        itemsFav.remove(items[position].id)
+                        theFavButton.setImageResource(R.drawable.ic_star_border_black_24dp)
+                    }
+
+                    else{
+                        itemsFav.add(items[position].id)
+                        theFavButton.setImageResource(R.drawable.ic_star_black_24dp)
+                    }
+                }
+
+                val theModel = JokeView.Model(theJoke,theShareButton,theFavButton,theIsFav)
 
                 holder.jokeView.setupView(theModel)
             }
@@ -53,15 +62,15 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
     override fun getItemCount(): Int {
         return items.size
     }
-    //fun submitList(jokeList: List<Joke>)
 
      fun submitList(joke: Joke){
         items.add(joke)
         notifyDataSetChanged()
      }
 
-    fun getList(): List<Joke> {
-        return items
+    fun submitFav(joke:String){
+        itemsFav.add(joke)
+        notifyDataSetChanged()
     }
 
 
@@ -81,7 +90,6 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
         private val blague: TextView = jokeView.my_joke
 
         fun bind(joke: Joke){
-            //blague.setText(joke.value)
             blague.text = joke.value
         }
 

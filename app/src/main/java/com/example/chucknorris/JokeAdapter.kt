@@ -28,9 +28,9 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
                 //val theJoke = holder.jokeView.my_joke
                 val theShareButton: ImageButton = holder.jokeView.findViewById(R.id.share_button)
                 val theFavButton: ImageButton = holder.jokeView.findViewById(R.id.fav_button)
-                val theIsFav: Boolean = false
+                val theIsFav = false
 
-                if(theIsFav){ //La boucle qui va déterminer si l'items est déjà "fav" ou non puis attribuer l'icône étoile pleine ou non
+                if(theIsFav){ // La boucle qui va déterminer si l'items est déjà "fav" ou non puis attribuer l'icône étoile pleine ou non
                     theFavButton.setImageResource(R.drawable.ic_star_black_24dp)
                 }
 
@@ -54,7 +54,7 @@ class JokeAdapter(private val onBottomReached: () -> Unit = {}) : RecyclerView.A
 
         }
         if(position==items.size-1)
-            {onBottomReached()}
+            { onBottomReached() }
 
     }
 

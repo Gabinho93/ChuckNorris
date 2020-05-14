@@ -53,14 +53,17 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences: SharedPreferences = getSharedPreferences(JOKES_FAV,MODE_PRIVATE)
         if (savedInstanceState != null){
             //savedInstanceState.getString(JOKES_KEY)?.let {
-             //   Json(JsonConfiguration.Stable).parse(Joke.serializer().list, it)
+            //   Json(JsonConfiguration.Stable).parse(Joke.serializer().list, it)
 
             val jokesSaved = savedInstanceState.getString(JOKES_KEY)?.let { Json(JsonConfiguration.Stable).parse(Joke.serializer().list, it) }
             jokesSaved?.forEach { jokeAdapter.submitList(it) }
+            val json = Json(JsonConfiguration.Stable)
 
             //val favJokes = savedInstanceState.getString(JOKES_FAV)?.let { Json(JsonConfiguration.Stable).parse(String.serializer().list, it) }
+            val favJokes = savedInstanceState.getString(JOKES_FAV)
             //favJokes?.forEach{ jokeAdapter.submitFav(it) }
-
+            if(favJokes != null){
+            }
         }
 
         else {
@@ -68,11 +71,9 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
         Swipe.setColorSchemeColors(Color.GRAY)
         Swipe.setOnRefreshListener {
                 jokesService()
-                Swipe.isRefreshing
         }
 
 
@@ -115,10 +116,11 @@ class MainActivity : AppCompatActivity() {
                     .setDuration(2000)
                     .start()
                 progress_bar.visibility = View.VISIBLE
-                Swipe.stopNestedScroll()
+
             }
             .doAfterTerminate {
                 progress_bar.visibility = View.INVISIBLE
+                Swipe.isRefreshing = false
             }
             .subscribeBy(
                 onError = { error -> Log.e("Error Joke","$error")  }, //affiche msg d'erreur dans Logcat
